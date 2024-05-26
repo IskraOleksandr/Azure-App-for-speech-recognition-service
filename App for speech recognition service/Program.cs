@@ -6,6 +6,9 @@ using Microsoft.CognitiveServices.Speech.Audio;
 
 class Program
 {
+    static string speechKey = Environment.GetEnvironmentVariable("SPEECH_KEY");
+    static string speechRegion = Environment.GetEnvironmentVariable("SPEECH_REGION");
+
     static void OutputSpeechRecognitionResult(SpeechRecognitionResult speechRecognitionResult)
     {
         switch (speechRecognitionResult.Reason)
@@ -32,7 +35,7 @@ class Program
 
     async static Task Main(string[] args)
     {
-        var speechConfig = SpeechConfig.FromSubscription("0d6786f66c1a40389ae3ff1983ce3ddd", "eastus");
+        var speechConfig = SpeechConfig.FromSubscription(speechKey, speechRegion);
         speechConfig.SpeechRecognitionLanguage = "uk-UA";
 
         using var audioConfig = AudioConfig.FromDefaultMicrophoneInput();
